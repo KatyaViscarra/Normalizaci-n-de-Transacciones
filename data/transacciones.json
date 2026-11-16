@@ -1,0 +1,138 @@
+
+[
+    {
+        "fuente": "paypal",
+        "transaction_id": "PP001",
+        "amount": 150.75,
+        "currency": "usd",
+        "status": "approved",
+        "created_at": "2026-11-10",
+        "description": "Pago de servicio web"
+    },
+    {
+        "fuente": "paypal",
+        "transaction_id": "PP002",
+        "amount": 85.00,
+        "currency": "EUR",
+        "status": "pending",
+        "created_at": "10/11/2026",
+        "description": "Compra de software"
+    },
+    {
+        "fuente": "paypal",
+        "transaction_id": "PP003",
+        "amount": -25.50,
+        "currency": "USD",
+        "status": "refunded",
+        "created_at": "2026-11-11T14:30:00",
+        "description": "Reembolso de compra"
+    },
+    {
+        "fuente": "paypal",
+        "transaction_id": "PP004",
+        "amount": 0,
+        "currency": "USD",
+        "status": "completed",
+        "created_at": "2026-11-12",
+        "description": "Monto en cero"
+    },
+    {
+        "fuente": "paypal",
+        "transaction_id": "PP005",
+        "amount": 45.00,
+        "currency": "JPY",
+        "status": "success",
+        "created_at": "2026-11-13",
+        "description": "Moneda no soportada"
+    },
+    {
+        "fuente": "stripe",
+        "id": "ST001",
+        "total": 320.50,
+        "currency_code": "USD",
+        "payment_status": "success",
+        "created": "2026-11-10T09:15:00",
+        "description": "Pago de suscripción"
+    },
+    {
+        "fuente": "stripe",
+        "id": "ST002",
+        "total": 120.00,
+        "currency_code": "mxn",
+        "payment_status": "processing",
+        "created": "11/11/2026",
+        "description": "Compra en línea"
+    },
+    {
+        "fuente": "stripe",
+        "id": "ST003",
+        "total": -60.00,
+        "currency_code": "EUR",
+        "payment_status": "refunded",
+        "created": "2026-11-12",
+        "description": "Devolución de producto"
+    },
+    {
+        "fuente": "stripe",
+        "id": "ST004",
+        "total": "abc",
+        "currency_code": "USD",
+        "payment_status": "completed",
+        "created": "2026-11-13",
+        "description": "Monto con formato incorrecto"
+    },
+    {
+        "fuente": "stripe",
+        "id": "ST005",
+        "total": 75.00,
+        "currency_code": "USD",
+        "payment_status": "unknown",
+        "created": "2026-11-14",
+        "description": "Estado desconocido"
+    },
+    {
+        "fuente": "banco",
+        "referencia": "BN001",
+        "monto": 500.00,
+        "moneda": "USD",
+        "estado": "completed",
+        "fecha_operacion": "2026-11-10",
+        "detalle": "Transferencia recibida"
+    },
+    {
+        "fuente": "banco",
+        "referencia": "BN002",
+        "monto": 250.75,
+        "moneda": "COP",
+        "estado": "pending",
+        "fecha_operacion": "15/11/2026",
+        "detalle": "Transferencia pendiente"
+    },
+    {
+        "fuente": "banco",
+        "referencia": "BN003",
+        "monto": -100.00,
+        "moneda": "USD",
+        "estado": "refunded",
+        "fecha_operacion": "2026-11-12",
+        "detalle": "Devolución bancaria"
+    },
+    {
+        "fuente": "banco",
+        "referencia": "BN004",
+        "monto": 90.00,
+        "moneda": "EUR",
+        "estado": "approved",
+        "fecha_operacion": "2026-15-40",
+        "detalle": "Fecha incorrecta"
+    },
+    {
+        "fuente": "banco",
+        "referencia": "",
+        "monto": 180.00,
+        "moneda": "USD",
+        "estado": "success",
+        "fecha_operacion": "2026-11-14",
+        "detalle": "Identificador faltante"
+    }
+]

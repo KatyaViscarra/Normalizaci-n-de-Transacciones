@@ -1,0 +1,37 @@
+
+{
+    "monedas_soportadas": [
+        "USD",
+        "EUR",
+        "MXN",
+        "COP"
+    ],
+    "fuentes_soportadas": [
+        "paypal",
+        "stripe",
+        "banco"
+    ],
+    "estados": {
+        "approved": "completada",
+        "success": "completada",
+        "completed": "completada",
+        "pending": "pendiente",
+        "processing": "pendiente",
+        "failed": "fallida",
+        "rejected": "fallida",
+        "cancelled": "cancelada",
+        "canceled": "cancelada",
+        "refunded": "reembolsada",
+        "refund": "reembolsada"
+    },
+    "formatos_fecha": [
+        "%Y-%m-%d",
+        "%d/%m/%Y",
+        "%m/%d/%Y",
+        "%Y-%m-%dT%H:%M:%S"
+    ],
+    "formato_fecha_salida": "%Y-%m-%d",
+    "monto_minimo": 0,
+    "permitir_montos_negativos": true,
+    "manejo_invalidos": "marcar"
+}

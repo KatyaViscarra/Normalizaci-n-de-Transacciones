@@ -31,7 +31,24 @@ MAPEO_CAMPOS = {
         "fecha": "fecha_operacion",
         "descripcion": "detalle"
     }
+    
 }
+
+FIRMAS_FUENTE = {
+    "paypal": "transaction_id",
+    "stripe": "payment_status",
+    "banco": "referencia",
+}
+
+def detectar_fuente(transaccion):
+    """Usa el campo 'fuente'; si falta, la infiere por los campos propios."""
+    fuente = str(transaccion.get("fuente", "")).strip().lower()
+    if fuente:
+        return fuente
+    for nombre, campo in FIRMAS_FUENTE.items():
+        if campo in transaccion:
+            return nombre
+    return fuente
 
 
 def cargar_reglas(ruta="config/reglas.json"):
@@ -84,7 +101,7 @@ def normalizar_transaccion(transaccion, reglas):
     if not isinstance(transaccion, dict):
         transaccion = {}
 
-    fuente = str(transaccion.get("fuente", "")).strip().lower()
+    fuente = detectar_fuente(transaccion)
 
     mapeo = MAPEO_CAMPOS.get(fuente, {})
 

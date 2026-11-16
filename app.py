@@ -50,6 +50,35 @@ def procesar_datos():
 try:
     validas, invalidas, metricas = procesar_datos()
 
+        # --- Filtros en la barra lateral ---
+    def valor(t, campo):
+        return t[campo] or "(sin dato)"
+
+    todas = validas + invalidas
+    st.sidebar.header("Filtros")
+
+    def selector(etiqueta, campo):
+        opciones = sorted({valor(t, campo) for t in todas})
+        return st.sidebar.multiselect(etiqueta, opciones, default=opciones)
+
+    f_fuente = selector("Fuente", "fuente")
+    f_moneda = selector("Moneda", "moneda")
+    f_estado = selector("Estado", "estado")
+    busqueda = st.sidebar.text_input("Buscar por ID o descripción").strip().lower()
+
+    def filtrar(lista):
+        return [
+            t for t in lista
+            if valor(t, "fuente") in f_fuente
+            and valor(t, "moneda") in f_moneda
+            and valor(t, "estado") in f_estado
+            and busqueda in f"{t['id'] or ''} {t['descripcion'] or ''}".lower()
+        ]
+
+    validas_f = filtrar(validas)
+    invalidas_f = filtrar(invalidas)
+    metricas = calcular_metricas(validas_f, invalidas_f)
+
     # Indicadores principales
     st.subheader("Resumen general")
 
@@ -75,7 +104,7 @@ try:
     col4.metric(
         "Fuentes",
         len(set(
-            t["fuente"] for t in validas + invalidas
+            t["fuente"] for t in validas_f + invalidas_f
         ))
     )
 
@@ -89,32 +118,29 @@ try:
     with col_grafico1:
         st.write("**Transacciones por estado**")
 
-        datos_estados = pd.DataFrame(
-            list(metricas["conteo_estados"].items()),
-            columns=["Estado", "Cantidad"]
-        )
-
-        st.bar_chart(
-            datos_estados.set_index("Estado")
-        )
+        if metricas["conteo_estados"]:
+            datos_estados = pd.DataFrame(
+                list(metricas["conteo_estados"].items()),
+                columns=["Estado", "Cantidad"]
+            )
+            st.bar_chart(datos_estados.set_index("Estado"))
+        else:
+            st.info("Sin datos con los filtros actuales.")
 
     with col_grafico2:
         st.write("**Totales netos por moneda**")
 
-        datos_monedas = pd.DataFrame(
-            [
-                {
-                    "Moneda": moneda,
-                    "Total": float(total)
-                }
-                for moneda, total
-                in metricas["totales_por_moneda"].items()
-            ]
-        )
-
-        st.bar_chart(
-            datos_monedas.set_index("Moneda")
-        )
+        if metricas["totales_por_moneda"]:
+            datos_monedas = pd.DataFrame(
+                [
+                    {"Moneda": moneda, "Total": float(total)}
+                    for moneda, total
+                    in metricas["totales_por_moneda"].items()
+                ]
+            )
+            st.bar_chart(datos_monedas.set_index("Moneda"))
+        else:
+            st.info("Sin datos con los filtros actuales.")
 
     st.divider()
 
@@ -136,8 +162,8 @@ try:
 
         return pd.DataFrame(filas)
 
-    df_validas = preparar_tabla(validas)
-    df_invalidas = preparar_tabla(invalidas)
+    df_validas = preparar_tabla(validas_f)
+    df_invalidas = preparar_tabla(invalidas_f)
 
     # Tablas de resultados
     st.subheader("Detalle de transacciones")
@@ -149,7 +175,7 @@ try:
 
     with tab1:
         st.write(
-            f"Se encontraron {len(validas)} "
+            f"Se encontraron {len(validas_f)} "
             "transacciones válidas."
         )
         st.dataframe(
@@ -160,7 +186,7 @@ try:
 
     with tab2:
         st.write(
-            f"Se encontraron {len(invalidas)} "
+            f"Se encontraron {len(invalidas_f)} "
             "transacciones inválidas."
         )
         st.dataframe(
@@ -174,7 +200,7 @@ try:
     # Descarga de resultados
     st.subheader("Exportar resultados")
 
-    df_completo = preparar_tabla(validas + invalidas)
+    df_completo = preparar_tabla(validas_f + invalidas_f)
 
     archivo_csv = df_completo.to_csv(
         index=False

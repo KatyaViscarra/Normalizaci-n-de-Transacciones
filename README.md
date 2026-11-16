@@ -169,7 +169,7 @@ git clone https://github.com/KatyaViscarra/Normalizaci-n-de-Transacciones.git
 ### 2. Ingresar a la carpeta del proyecto
 
 ```bash
-cd normalizacion_transacciones
+cd Normalizaci-n-de-Transacciones
 ```
 
 ### 3. Crear el entorno virtual

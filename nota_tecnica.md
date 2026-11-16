@@ -29,6 +29,6 @@ En las pruebas realizadas con 15 registros, se obtuvieron 9 transacciones válid
 
 ## 5. Uso de inteligencia artificial y criterio humano
 
-Se utilizó inteligencia artificial como herramienta de apoyo para revisar y documentar partes de la solución. Sin embargo, las decisiones sobre el esquema unificado, las monedas admitidas, las equivalencias de estados, los formatos de fecha y los criterios de validación asi como el desarrollo de la aplicación fueron definidas y revisadas por el valor humano, en este caso, mi persona como estudiante.
+Se utilizó inteligencia artificial como herramienta de apoyo para desarrollar, revisar y documentar partes de la solución. Sin embargo, las decisiones sobre el esquema unificado, las monedas admitidas, las equivalencias de estados, los formatos de fecha y los criterios de validación asi como el desarrollo de la aplicación fueron definidas y revisadas por mi, como estudiante.
 
 Finalmente, se ejecutaron pruebas funcionales para comprobar la normalización, identificación de errores, generación de métricas y exportación de resultados.
